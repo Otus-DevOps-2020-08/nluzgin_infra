@@ -40,7 +40,7 @@ someinternalhost_IP = 10.132.0.3
 ДЗ №6
 
 
-testapp_IP = 35.198.167.169
+testapp_IP = 35.204.193.111
 testapp_port = 9292
 
 Создание правил FW из командной строки
