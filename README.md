@@ -35,3 +35,23 @@ Host someinternalhost
 
 bastion_IP = 35.195.179.208
 someinternalhost_IP = 10.132.0.3
+
+
+ДЗ №6
+
+
+testapp_IP = 35.204.193.111
+testapp_port = 9292
+
+Создание правил FW из командной строки
+
+gcloud compute firewall-rules create default-puma-server \
+	--direction=IN \
+	--rules=tcp:9292 \
+	--source-ranges=0.0.0.0/0 \
+	--action=ALLOW \
+	--priority=1000 \
+	--target-tags=puma-server \
+	--network=default
+
+
