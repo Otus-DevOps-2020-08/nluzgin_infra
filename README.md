@@ -54,4 +54,7 @@ gcloud compute firewall-rules create default-puma-server \
 	--target-tags=puma-server \
 	--network=default
 
-
+ДЗ №7
+- Создан базовый образ с ruby & mongo на борту с помощью packer
+- Создан полный образ приложения reddit на основе базового образа
+- Создан sh скрипт разворачивающий инстанс с приложением reddit, который использует предсконфигурированный образ, созданный с помощью packer

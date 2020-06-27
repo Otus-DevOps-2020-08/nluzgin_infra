@@ -1,15 +1,10 @@
 {
-  "variables": {
-    "project_id": null,
-    "source_image_family": null,
-    "machine_type": null
-  },
   "builders": [
     {
       "type": "googlecompute",
       "project_id": "{{user `project_id`}}",
-      "image_name": "reddit-base-{{timestamp}}",
-      "image_family": "reddit-base",
+      "image_name": "reddit-full-{{timestamp}}",
+      "image_family": "reddit-full",
       "source_image_family": "{{user `source_image_family`}}",
       "zone": "europe-west1-b",
       "ssh_username": "nluzgin",
@@ -23,14 +18,20 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
-      "script": "scripts/install_ruby.sh",
-      "execute_command": "sudo {{.Path}}"
+      "type": "file",
+      "source": "files/reddit.service",
+      "destination": "/tmp/reddit.service"
     },
     {
       "type": "shell",
-      "script": "scripts/install_mongodb.sh",
-      "execute_command": "sudo {{.Path}}"
+      "inline": [
+        "sudo cp /tmp/reddit.service /lib/systemd/system/reddit.service",
+        "cd ~ && git clone -b monolith https://github.com/express42/reddit.git",
+        "cd ~/reddit && bundle install",
+        "sudo systemctl start mongod",
+        "sudo systemctl enable reddit",
+        "sudo systemctl start reddit"
+      ]
     }
   ]
 }
