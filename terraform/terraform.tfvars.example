@@ -1,5 +1,5 @@
 project          = "infra-3000-pro"
-public_key_path  = "~/.ssh/secret_no_ne_ochen_key.pub"
+# public_key_path  = "~/.ssh/secret_no_ne_ochen_key.pub"
 disk_image       = "reddit-base-evalution-socer-of-midlle-erth-3000-pro-example"
-private_key_path = "~/.ssh/secret_key"
+# private_key_path = "~/.ssh/secret_key"
 zone             = "europe-kanye-west1-c4"
