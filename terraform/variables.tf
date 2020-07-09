@@ -27,3 +27,21 @@ variable zone {
   # Значение по умолчанию
   default = "europe-west1-b"
 }
+
+variable app_name {
+  description = "name"
+  # Значение по умолчанию
+  default = "reddit-app-by-terraform"
+}
+
+variable port {
+  description = "port"
+  # Значение по умолчанию
+  default = "9292"
+}
+
+variable count_of_applications {
+  description = "port"
+  # Значение по умолчанию
+  default = 2
+}

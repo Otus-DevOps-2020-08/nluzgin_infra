@@ -11,10 +11,11 @@ provider "google" {
 }
 
 resource "google_compute_instance" "app" {
-  name         = "reddit-app-by-terraform"
+  name         = "${var.app_name}-${count.index}"
   machine_type = "g1-small"
   zone         = var.zone
   tags         = ["reddit-app"]
+  count = var.count_of_applications
 
   boot_disk {
     initialize_params {
@@ -68,4 +69,11 @@ resource "google_compute_firewall" "firewall_puma" {
 
   # Правило применимо для инстансов с перечисленными тэгами
   target_tags = ["reddit-app"]
+}
+
+
+resource "google_compute_project_metadata" "ssh-keys" {
+  metadata = {
+    ssh-keys = "appuser1:${file(var.public_key_path)} appuser2:${file(var.public_key_path)}"
+  }
 }
