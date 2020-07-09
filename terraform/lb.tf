@@ -1,8 +1,6 @@
 resource "google_compute_target_pool" "reddit-app-pool" {
   name = "reddit-app-pool"
-  instances = [
-    "${var.zone}/${var.app_name}"
-  ]
+  instances = google_compute_instance.app[*].self_link
   health_checks = [
     google_compute_http_health_check.reddit-app-pool_hc.name,
   ]
