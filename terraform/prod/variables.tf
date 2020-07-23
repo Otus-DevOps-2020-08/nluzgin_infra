@@ -48,15 +48,15 @@ variable count_of_applications {
 
 variable app_disk_image {
   description = "Disk image for reddit app"
-  default     = "reddit-base-app-1594739783"
+  default = "reddit-base-app-1594739783"
 }
 
 variable db_disk_image {
   description = "Disk image for reddit db"
-  default     = "reddit-base-db-1594740057"
+  default = "reddit-base-db-1594740057"
 }
 
 variable source_ranges {
   description = "Allowed IP addresses"
-  default     = ["0.0.0.0/0"]
+  default = ["0.0.0.0/0"]
 }
