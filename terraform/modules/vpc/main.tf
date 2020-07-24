@@ -12,14 +12,14 @@ resource "google_compute_firewall" "firewall_puma" {
   }
 
   # Каким адресам разрешаем доступ
-  source_ranges = ["0.0.0.0/0"]
+  source_ranges = var.source_ranges
 
   # Правило применимо для инстансов с перечисленными тэгами
   target_tags = ["reddit-app"]
 }
 
 resource "google_compute_firewall" "firewall_mongo" {
-  name = "allow-mongo-default"
+  name = "default-mongo"
   network = "default"
   allow {
     protocol = "tcp"

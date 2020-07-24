@@ -2,8 +2,9 @@ resource "google_compute_instance" "db" {
   name = "reddit-db"
   machine_type = "g1-small"
   zone = var.zone
-    tags = ["reddit-db"]
-    boot_disk {
+  tags = ["reddit-db"]
+
+  boot_disk {
     initialize_params {
       image = var.db_disk_image
     }
@@ -13,11 +14,9 @@ resource "google_compute_instance" "db" {
     access_config {
     }
   }
- }
-
-
-resource "google_compute_project_metadata" "db-ssh-keys" {
   metadata = {
     ssh-keys = "nluzgin:${file(var.public_key_path)}"
   }
-}
+
+ }
+
