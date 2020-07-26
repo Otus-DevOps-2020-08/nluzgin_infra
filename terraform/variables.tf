@@ -48,12 +48,12 @@ variable count_of_applications {
 
 variable app_disk_image {
   description = "Disk image for reddit app"
-  default     = "reddit-base-app-1594739783"
+  default     = "reddit-base-app-1595787679"
 }
 
 variable db_disk_image {
   description = "Disk image for reddit db"
-  default     = "reddit-base-db-1594740057"
+  default     = "reddit-base-db-1595787464"
 }
 
 variable source_ranges {

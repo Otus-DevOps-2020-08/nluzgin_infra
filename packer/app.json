@@ -18,14 +18,15 @@
       "disk_size": "{{user `disk_size`}}",
       "disk_type": "{{user `disk_type`}}",
       "network": "{{user `network`}}",
-      "tags": ["{{user `puma-fw-rules-tag`}}"]
+      "tags": [
+        "{{user `puma-fw-rules-tag`}}"
+      ]
     }
   ],
   "provisioners": [
     {
-      "type": "shell",
-      "script": "scripts/install_ruby.sh",
-      "execute_command": "sudo {{.Path}}"
+      "type": "ansible",
+      "playbook_file": "ansible/packer_app.yml"
     }
   ]
 }

@@ -11,5 +11,5 @@ variable zone {
 
 variable db_disk_image {
   description = "Disk image for reddit db"
-  default = "reddit-base-db-1594740057"
+  default = "reddit-base-db-1595787464"
 }
