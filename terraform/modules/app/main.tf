@@ -28,28 +28,28 @@ resource "google_compute_instance" "app" {
     private_key = file(var.private_key_path)
   }
 
-  provisioner "file" {
-    source      = "${path.module}/files/puma.service"
-    destination = var.puma_service_path
-  }
-
-  provisioner "file" {
-    source      = "${path.module}/files/deploy.sh"
-    destination = var.deploy_script_path
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo echo DATABASE_URL=${var.db_ip} >> ~/.bashrc ",
-    ]
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x ${var.deploy_script_path}",
-      "sh ${var.deploy_script_path} ${var.puma_service_path}"
-    ]
-  }
+//  provisioner "file" {
+//    source      = "${path.module}/files/puma.service"
+//    destination = var.puma_service_path
+//  }
+//
+//  provisioner "file" {
+//    source      = "${path.module}/files/deploy.sh"
+//    destination = var.deploy_script_path
+//  }
+//
+//  provisioner "remote-exec" {
+//    inline = [
+//      "sudo echo DATABASE_URL=${var.db_ip} >> ~/.bashrc ",
+//    ]
+//  }
+//
+//  provisioner "remote-exec" {
+//    inline = [
+//      "chmod +x ${var.deploy_script_path}",
+//      "sh ${var.deploy_script_path} ${var.puma_service_path}"
+//    ]
+//  }
 }
 
 resource "google_compute_address" "app_ip" {
