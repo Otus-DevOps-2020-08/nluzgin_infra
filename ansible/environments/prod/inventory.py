@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import re
+import os
 import json
 import argparse
 
@@ -39,12 +41,33 @@ def get_instance_ip_by_name(name, instances):
 def get_args():
     """
     Получение входных параметров
-    :return: 
+    :return:
     """
     parser = argparse.ArgumentParser()
     parser.add_argument('--list', required=False, action='store_true')
     args = parser.parse_args()
     return args
+
+
+def renew_db_ip_in_vars(new_db_host):
+    """
+    Обновим db_host: в group_vars/app актуальным значением
+    :return:
+    """
+
+    env_var_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'group_vars', 'app')
+
+    with open(env_var_path, mode='r', encoding='utf-8') as file:
+        # Читаем старьё
+        new_content = file.read()
+        # Ищем старый ip
+        old_db_host = [line for line in new_content.splitlines() if 'db_host: ' in line][0]
+        # Меняем старый ip на свеженький
+        new_content = new_content.replace(old_db_host, 'db_host: ' + new_db_host)
+
+    # Перезаписываем файл
+    with open(env_var_path, mode='w', encoding='utf-8') as file:
+        file.write(new_content)
 
 
 def main():
@@ -85,12 +108,15 @@ def main():
             }
         }
 
-        with open('inventory.json', mode='w', encoding='utf-8') as inventory_file:
+        inventory_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'inventory.json')
+        with open(inventory_path, mode='w', encoding='utf-8') as inventory_file:
             inventory_string = json.dumps(inventory)
             # именно этого ждёт ansible
             print(inventory_string)
             # Для потомков
             json.dump(inventory, inventory_file, sort_keys=True, indent=3)
+            # включаем лень на максималку
+            renew_db_ip_in_vars(reddit_db_ip_list[0])
 
 
 if __name__ == '__main__':
