@@ -6,5 +6,5 @@
   "disk_size": "1000000000",
   "disk_type": "XXl-standard+",
   "network": "SecureNetwork",
-  "tags": "best"
+  "puma-fw-rules-tag": "best"
 }

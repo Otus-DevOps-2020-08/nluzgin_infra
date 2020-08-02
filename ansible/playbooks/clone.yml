@@ -6,3 +6,4 @@
       git:
         repo: https://github.com/express42/reddit.git
         dest: /home/nluzgin/reddit
+        version: 5c217c565c1122c5343dc0514c116ae816c17ca2

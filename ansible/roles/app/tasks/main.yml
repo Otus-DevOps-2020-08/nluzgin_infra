@@ -22,7 +22,6 @@
   systemd: name=puma enabled=yes
 
 # Иначе ругается при установке (заметил совсем недавно)
-- name: Upgrade bundler package to the latest version
+- name: Upgrade bundler package to actual version (1.11.2-1)
   apt:
-    name: "bundler"
-    state: latest
+    name: "bundler=1.11.2-1"
