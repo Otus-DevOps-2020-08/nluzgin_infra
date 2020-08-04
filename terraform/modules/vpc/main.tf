@@ -27,6 +27,7 @@ resource "google_compute_firewall" "firewall_mongo" {
   }
   target_tags = ["reddit-db"]
   source_tags = ["reddit-app"]
+  source_ranges = var.source_ranges
 }
 
 resource "google_compute_firewall" "firewall_ssh" {
@@ -37,4 +38,16 @@ resource "google_compute_firewall" "firewall_ssh" {
     ports = ["22"]
   }
   source_ranges = var.source_ranges
+}
+
+resource "google_compute_firewall" "firewall_http_80" {
+  name = "allow-http-80"
+  network = "default"
+  allow {
+   protocol = "tcp"
+    ports = ["80"]
+  }
+  source_ranges = var.source_ranges
+  # Правило применимо для инстансов с перечисленными тэгами
+  target_tags = ["reddit-app"]
 }
