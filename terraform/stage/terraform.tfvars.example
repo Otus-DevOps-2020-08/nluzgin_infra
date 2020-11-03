@@ -1,0 +1,7 @@
+project          = "infra-3000-pro"
+public_key_path  = "~/.ssh/lol_kek.pub"
+disk_image       = "reddit-base-3000-pro-extreme"
+private_key_path = "~/.ssh/lol_kek"
+zone             = "europe-west-coast"
+app_name         = "reddit-app-by-terraform"
+port             = "42"

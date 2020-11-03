@@ -1,0 +1,10 @@
+{
+  "project_id": "infra-123456789",
+  "source_image_family": "ubuntu-3000-pro",
+  "machine_type": "C4-boom",
+  "image_description": "El description del server",
+  "disk_size": "1000000000",
+  "disk_type": "XXl-standard+",
+  "network": "SecureNetwork",
+  "puma-fw-rules-tag": "best"
+}

@@ -1,0 +1,37 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `project_id`}}",
+      "image_name": "reddit-full-{{timestamp}}",
+      "image_family": "reddit-full",
+      "source_image_family": "{{user `source_image_family`}}",
+      "zone": "europe-west1-b",
+      "ssh_username": "nluzgin",
+      "machine_type": "{{user `machine_type`}}",
+      "image_description": "{{user `image_description`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type": "{{user `disk_type`}}",
+      "network": "{{user `network`}}",
+      "tags": ["{{user `puma-fw-rules-tag`}}"]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/reddit.service",
+      "destination": "/tmp/reddit.service"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo cp /tmp/reddit.service /lib/systemd/system/reddit.service",
+        "cd ~ && git clone -b monolith https://github.com/express42/reddit.git",
+        "cd ~/reddit && bundle install",
+        "sudo systemctl start mongod",
+        "sudo systemctl enable reddit",
+        "sudo systemctl start reddit"
+      ]
+    }
+  ]
+}
